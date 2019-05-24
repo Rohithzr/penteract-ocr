@@ -22,14 +22,14 @@ const makePromise = (method) => {
   return (arg, options) => new Promise((resolve, reject) => {
     options = handleOptions(options)
 
-    bindings[method](arg, options.lang, (err, text) => {
+    bindings[method](arg, options.lang, (err, text, confidence) => {
       if (err) {
         const error = new Error(text)
         error.code = err
         return reject(error)
       }
 
-      resolve(text.trim())
+      resolve(text.trim(), confidence)
     })
   })
 }
