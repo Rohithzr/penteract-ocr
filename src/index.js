@@ -1,4 +1,4 @@
-import bindings from '../build/Release/penteract'
+import bindings from '../build/Release/penteract.node'
 
 
 const DEFAULT_LANG = 'eng'
