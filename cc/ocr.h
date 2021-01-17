@@ -6,7 +6,7 @@
 
 
 int TessRecognizePix (Pix *image,
-                      const char *lang, char *&outText, const char *datapath,
+                      const char *lang, std::vector<char *> &outText, const char *datapath,
                       char *error_code, char *error_message);
 
 #endif

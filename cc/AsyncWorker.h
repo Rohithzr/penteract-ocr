@@ -20,7 +20,7 @@ private:
 
 protected:
 
-  char *outText;
+  std::vector<char *> outText = std::vector<char *>();
   char *lang;
 
   // Set a char
@@ -62,9 +62,15 @@ protected:
   void HandleOKCallback () {
     HandleScope scope;
 
+    // Convert string Vector to V8 array
+    v8::Handle<v8::Array> wordArray = New<v8::Array>( outText.size() );
+    for (unsigned i=0; i < outText.size(); i++) {
+        wordArray->Set( New<v8::Number>(i), New<v8::String>(outText[i], strlen(outText[i])).ToLocalChecked() );
+    }
+
     v8::Local<v8::Value> argv[] = {
       Null(),
-      New(outText, strlen(outText)).ToLocalChecked()
+      wordArray
     };
 
     callback->Call(2, argv);
